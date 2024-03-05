@@ -7,7 +7,7 @@
                     <!-- Page pre-title -->
 
                     <h2 class="page-title">
-                        Data Sekolah
+                        Jenis PTK
                     </h2>
                 </div>
 
@@ -88,7 +88,7 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Kode Sekolah</th>
-                                                <th>Nama Sekolah</th>
+                                                <th>Jenis PTK</th>
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
