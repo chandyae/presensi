@@ -19,7 +19,7 @@ function selisih($jam_masuk, $jam_keluar)
         $foto_in = Storage::url('uploads/absensi/' . $d->foto_in);
         $foto_out = Storage::url('uploads/absensi/' . $d->foto_out);
     @endphp
-    @if ($d->status == 'h')
+    @if ($d->status == 'H')
         <tr>
             <td>{{ $loop->iteration }}</td>
             <td>{{ $d->nik }}</td>
