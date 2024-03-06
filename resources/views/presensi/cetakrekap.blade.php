@@ -127,7 +127,10 @@
             @foreach ($rekap as $r)
                 <tr>
                     <!-- <td>{{ $r->nik }}</td> -->
-                    <td>{{ $r->nama_lengkap }}</td>
+                    <td><b>{{ $r->nama_lengkap }}</b><br>
+                        NIP. {{$r->nik }} <br>
+                        
+                    </td>
 
                     <?php
                     $jml_hadir = 0;
@@ -148,22 +151,22 @@
 
                         $cekhari = gethari(date('D',strtotime($tgl_presensi)));
 
-                        if($status == "H"){
+                        if($status == "h"){
                             $jml_hadir += 1;
                             $color = "white";
                         }
 
-                        if($status == "I"){
+                        if($status == "i"){
                             $jml_izin += 1;
                             $color = "#ffbb00";
                         }
 
-                        if($status == "S"){
+                        if($status == "s"){
                             $jml_sakit += 1;
                             $color = "#34a1eb";
                         }
 
-                        if($status == "C"){
+                        if($status == "c"){
                             $jml_cuti += 1;
                             $color = "#a600ff";
                         }
