@@ -75,8 +75,8 @@
                 <td>
                     <span id="title">
                         LAPORAN PRESENSI GURU DAN TENAGA PENDIDIK<br>
+                        {{strtoupper ($karyawan->nama_cabang) }} KECAMATAN PAKISAJI<br>
                         PERIODE {{ strtoupper($namabulan[$bulan]) }} {{ $tahun }}<br>
-                        KECAMATAN PAKISAJI<br>
                     </span>
                     <span><i>Koordinator Wilayah Dinas Pendidikan Kecamatan Pakisaji Kabupaten Malang</i></span>
                 </td>
@@ -109,7 +109,7 @@
             <tr>
                 <td>Lembaga</td>
                 <td>:</td>
-                <td>{{ $karyawan->kode_cabang }}</td>
+                <td>{{ $karyawan->nama_cabang }}</td>
             </tr>
             <tr>
                 <td>No. HP</td>
@@ -201,7 +201,7 @@
             <tr>
                 <td style="text-align: center; vertical-align:bottom">
                     Pakisaji, {{ date('d-m-Y') }}<br>
-                    Kepala Sekolah
+                    Kepala {{ $karyawan->nama_cabang }}
                     <br>
                     <br>
                     <br>

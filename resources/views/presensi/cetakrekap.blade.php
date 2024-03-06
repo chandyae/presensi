@@ -59,8 +59,8 @@
 
 
         body.A4.landscape .sheet {
-            width: 297mm !important;
-            height: auto !important;
+            width: 330mm !important;
+            height: 209mm !important;
         }
     </style>
 </head>
@@ -148,22 +148,22 @@
 
                         $cekhari = gethari(date('D',strtotime($tgl_presensi)));
 
-                        if($status == "h"){
+                        if($status == "H"){
                             $jml_hadir += 1;
                             $color = "white";
                         }
 
-                        if($status == "i"){
+                        if($status == "I"){
                             $jml_izin += 1;
                             $color = "#ffbb00";
                         }
 
-                        if($status == "s"){
+                        if($status == "S"){
                             $jml_sakit += 1;
                             $color = "#34a1eb";
                         }
 
-                        if($status == "c"){
+                        if($status == "C"){
                             $jml_cuti += 1;
                             $color = "#a600ff";
                         }
@@ -175,13 +175,13 @@
                         }
 
                         if($cekhari == 'Minggu'){
-                           $color = "red";
+                             $color = "red";
                         }
                 ?>
                     <td style="background-color: {{ $color }}">
 
                         {{ $status }}
-                       
+            
                     </td>
                     <?php
                     }
@@ -195,11 +195,17 @@
             @endforeach
         </table>
 
+        <h4>Keterangan Libur :</h4>
+            <ol>
+                @foreach ($harilibur as $d)
+                <li>{{date('d-m-Y',strtotime($d->tanggal_libur))}} - {{$d->keterangan}}</li>
+                @endforeach
+            </ol>
         <table width="150%" style="margin-top:100px">
         <tr>
                 <td style="text-align: center; vertical-align:bottom">
                     Pakisaji, {{ date('d-m-Y') }}<br>
-                    Kepala Sekolah
+                    Kepala Sekolah 
                     <br>
                     <br>
                     <br>
@@ -210,6 +216,8 @@
                 </td>
             </tr>
         </table>
+
+        
     </section>
 
 </body>
