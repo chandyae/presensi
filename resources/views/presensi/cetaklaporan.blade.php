@@ -130,7 +130,7 @@
                 <th>Jml Jam</th>
             </tr>
             @foreach ($presensi as $d)
-                @if ($d->status == 'h')
+                @if ($d->status == 'H')
                     @php
                         $path_in = Storage::url('uploads/absensi/' . $d->foto_in);
                         $path_out = Storage::url('uploads/absensi/' . $d->foto_out);
