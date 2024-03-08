@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                 @else
-                                    
+                                    <input type="hidden" name="kode_cabang" value="{{Auth::guard('user')->user()->kode_cabang}}">
                                 @endrole
                                 <div class="row mt-2">
                                     <div class="col-12">

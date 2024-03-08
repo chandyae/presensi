@@ -172,6 +172,7 @@
                                                                         </svg>
                                                                     </a>
                                                                 @endrole
+                                                                @role('administrator', 'user')
                                                                 <a href="/konfigurasi/{{ $d->nik }}/setjamkerja"
                                                                     class="btn btn-success btn-sm ml-2">
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -188,6 +189,7 @@
                                                                         <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
                                                                     </svg>
                                                                 </a>
+                                                                @endrole
                                                                 <a href="/karyawan/{{ Crypt::encrypt($d->nik) }}/resetpassword"
                                                                     class="btn btn-sm btn-warning">
                                                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -207,6 +209,7 @@
                                                                     </svg>
                                                                 </a>
                                                             </div>
+                                                            
                                                             @role('administrator', 'user')
                                                                 <div>
                                                                     <form action="/karyawan/{{ $d->nik }}/delete"
