@@ -327,7 +327,7 @@ class PresensiController extends Controller
         $password = Hash::make($request->password);
         $karyawan = DB::table('karyawan')->where('nik', $nik)->first();
         $request->validate([
-            'foto' => 'image|mimes:png,jpg|max:500'
+            'foto' => 'image|mimes:png,jpg|max:1024'
         ]);
         if ($request->hasFile('foto')) {
             $foto = $nik . "." . $request->file('foto')->getClientOriginalExtension();
