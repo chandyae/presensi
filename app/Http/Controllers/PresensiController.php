@@ -131,6 +131,7 @@ class PresensiController extends Controller
     {
 
         $nik = Auth::guard('karyawan')->user()->nik;
+        $status_location = Auth::guard('karyawan')->user()->status_location;
         $hariini = date("Y-m-d");
         $jamsekarang = date("H:i");
         $tgl_sebelumnya = date('Y-m-d', strtotime("-1 days", strtotime($hariini)));
@@ -209,7 +210,7 @@ class PresensiController extends Controller
         $jamkerja_pulang = $tgl_pulang . " " . $jamkerja->jam_pulang;
         $datakaryawan = DB::table('karyawan')->where('nik', $nik)->first();
         $no_hp = $datakaryawan->no_hp;
-        if ($radius > $lok_kantor->radius_cabang) {
+        if ($status_location == 1 && $radius > $lok_kantor->radius_cabang) {
             echo "error|Maaf Anda Berada Diluar Radius, Jarak Anda " . $radius . " meter dari Kantor|radius";
         } else {
             if ($cek > 0) {
@@ -557,7 +558,6 @@ class PresensiController extends Controller
         $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
         $karyawan = DB::table('karyawan')->where('nik', $nik)
             ->join('departemen', 'karyawan.kode_dept', '=', 'departemen.kode_dept')
-            ->join('cabang', 'karyawan.kode_cabang', '=', 'cabang.kode_cabang')
             ->first();
 
         $presensi = DB::table('presensi')
@@ -598,9 +598,7 @@ class PresensiController extends Controller
         $dari  = $tahun . "-" . $bulan . "-01";
         $sampai = date("Y-m-t", strtotime($dari));
         $namabulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
-       
-        $harilibur = DB::table('harilibur')->whereBetween('tanggal_libur', [$dari,$sampai])->get();
-        // dd($harilibur);
+
         $select_date = "";
         $field_date = "";
         $i = 1;
@@ -669,7 +667,7 @@ class PresensiController extends Controller
 
         $query->orderBy('nama_lengkap');
         $rekap = $query->get();
-        
+
         //dd($rekap);
         if (isset($_POST['exportexcel'])) {
             $time = date("d-M-Y H:i:s");
@@ -678,7 +676,7 @@ class PresensiController extends Controller
             // Mendefinisikan nama file ekspor "hasil-export.xls"
             header("Content-Disposition: attachment; filename=Rekap Presensi Karyawan $time.xls");
         }
-        return view('presensi.cetakrekap', compact('bulan', 'tahun', 'namabulan', 'rekap', 'rangetanggal', 'jmlhari', 'harilibur'));
+        return view('presensi.cetakrekap', compact('bulan', 'tahun', 'namabulan', 'rekap', 'rangetanggal', 'jmlhari'));
     }
 
     public function izinsakit(Request $request)
