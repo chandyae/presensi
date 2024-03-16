@@ -40,7 +40,7 @@
 
         .tabelpresensi tr th {
             border: 1px solid #131212;
-            padding: 8px;
+            padding: 5px;
             background-color: #dbdbdb;
             font-size: 10px
         }
@@ -48,7 +48,7 @@
         .tabelpresensi tr td {
             border: 1px solid #131212;
             padding: 5px;
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .foto {
@@ -59,8 +59,8 @@
 
 
         body.A4.landscape .sheet {
-            width: 330mm !important;
-            height: 209mm !important;
+            width: 297mm !important;
+            height: auto !important;
         }
     </style>
 </head>
@@ -92,7 +92,7 @@
         <table style="width: 100%">
             <tr>
                 <td style="width: 30px">
-                    <img src="{{ asset('assets/img/logopresensi.png') }}" width="65" height="70" alt="">
+                    <img src="{{ asset('assets/img/logopresensi.png') }}" width="70" height="70" alt="">
                 </td>
                 <td>
                     <span id="title">
@@ -102,7 +102,6 @@
                     </span>
                     <span><i>Koordinator Wilayah Dinas Pendidikan Kecamatan Pakisaji Kabupaten Malang</i></span>
                 
-                    
                 </td>
             </tr>
         </table>
@@ -130,8 +129,6 @@
                     <!-- <td>{{ $r->nik }}</td> -->
                     <td><b>{{ $r->nama_lengkap }}</b><br>
                         NIP. {{$r->nik }} <br>
-                        
-                    </td>
 
                     <?php
                     $jml_hadir = 0;
@@ -179,13 +176,13 @@
                         }
 
                         if($cekhari == 'Minggu'){
-                             $color = "red";
+                           $color = "red";
                         }
                 ?>
                     <td style="background-color: {{ $color }}">
 
                         {{ $status }}
-            
+                       
                     </td>
                     <?php
                     }
@@ -199,17 +196,11 @@
             @endforeach
         </table>
 
-        <h4>Keterangan Libur :</h4>
-            <ol>
-                @foreach ($harilibur as $d)
-                <li>{{date('d-m-Y',strtotime($d->tanggal_libur))}} - {{$d->keterangan}}</li>
-                @endforeach
-            </ol>
         <table width="150%" style="margin-top:100px">
         <tr>
                 <td style="text-align: center; vertical-align:bottom">
                     Pakisaji, {{ date('d-m-Y') }}<br>
-                    Kepala Sekolah 
+                    Kepala Sekolah
                     <br>
                     <br>
                     <br>
@@ -220,8 +211,6 @@
                 </td>
             </tr>
         </table>
-
-        
     </section>
 
 </body>
