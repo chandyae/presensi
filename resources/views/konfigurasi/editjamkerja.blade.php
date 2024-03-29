@@ -128,6 +128,29 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+                            <div class="col-12">
+                                <div class="input-icon mb-3">
+                                    <span class="input-icon-addon">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm"
+                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                                            <path d="M12 10l0 3l2 0"></path>
+                                            <path d="M7 4l-2.75 2"></path>
+                                            <path d="M17 4l2.75 2"></path>
+                                        </svg>
+                                    </span>
+                                    <input type="text" value="{{ $jamkerja->total_jam }}" id="total_jam_edit" class="form-control"
+                                        placeholder="Total Jam" name="total_jam">
+                                </div>
+                            </div>
+                        </div>
+
     <div class="row">
         <div class="col-12">
             <div class="form-group">
@@ -167,6 +190,7 @@
         var jam_masuk = $("#jam_masuk_edit").val();
         var akhir_jam_masuk = $("#akhir_jam_masuk_edit").val();
         var jam_pulang = $("#jam_pulang_edit").val();
+        var total_jam = $("#total_jam_edit").val();
         var lintashari = $("#lintashari_edit").val();
         if (kode_jam_kerja == "") {
             // alert('Nik Harus Diisi');
@@ -237,6 +261,18 @@
                 confirmButtonText: 'Ok'
             }).then((result) => {
                 $("#jam_pulang").focus();
+            });
+
+            return false;
+        } else if (total_jam == "") {
+            // alert('Nik Harus Diisi');
+            Swal.fire({
+                title: 'Warning!',
+                text: 'Total Jam Harus Diisi !',
+                icon: 'warning',
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                $("#total_jam").focus();
             });
 
             return false;

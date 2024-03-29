@@ -89,6 +89,17 @@
                                         value="{{ Auth::guard('user')->user()->kode_dept }}">
                                 @endrole
                                 <div class="row mt-2">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <select name="jenis_laporan" id="jenis_laporan" class="form-select">
+                                                    <option value="">Jenis Laporan</option>
+                                                    <option value="1">Laporan Umum</option>
+                                                    <option value="2">Laporan Detail</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="row mt-2">
                                     <div class="col-6">
                                         <div class="form-group">
                                             <button type="submit" name="cetak" class="btn btn-primary w-100">

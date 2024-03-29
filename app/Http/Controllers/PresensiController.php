@@ -167,7 +167,7 @@ class PresensiController extends Controller
         $jamkerja = DB::table('konfigurasi_jamkerja_by_date')
             ->join('jam_kerja', 'konfigurasi_jamkerja_by_date.kode_jam_kerja', '=', 'jam_kerja.kode_jam_kerja')
             ->where('nik', $nik)
-            ->where('tanggal', $hariini)
+            ->where('tanggal', $tgl_presensi)
             ->first();
 
         //Jika Tidak Memiliki Jam Kerja By Date
@@ -211,13 +211,13 @@ class PresensiController extends Controller
         $datakaryawan = DB::table('karyawan')->where('nik', $nik)->first();
         $no_hp = $datakaryawan->no_hp;
         if ($status_location == 1 && $radius > $lok_kantor->radius_cabang) {
-            echo "error|Maaf Anda Berada Diluar Radius, Jarak Anda " . $radius . " meter dari Kantor|radius";
+            echo "error|Maaf Anda Berada diluar Radius, Jarak Anda " . $radius . " meter dari sekolah|radius";
         } else {
             if ($cek > 0) {
                 if ($jam_pulang < $jamkerja_pulang) {
                     echo "error|Maaf Belum Waktunya Pulang |out";
                 } else if (!empty($datapresensi->jam_out)) {
-                    echo "error|Anda Sudah Melakukan Absen Pulang Sebelmnya ! |out";
+                    echo "error|Anda Sudah Melakukan Absen Pulang Sebelumnya ! |out";
                 } else {
                     $data_pulang = [
                         'jam_out' => $jam,
@@ -246,9 +246,9 @@ class PresensiController extends Controller
                         $response = curl_exec($curl);
 
                         curl_close($curl);
-                        echo $response;
+                        // echo $response;
                     } else {
-                        echo "error|Maaf Gagal absen, Hubungi Tim It|out";
+                        echo "error|Maaf Gagal Absen, Hubungi Admin Sekolah|out";
                     }
                 }
             } else {
@@ -287,10 +287,10 @@ class PresensiController extends Controller
                         $response = curl_exec($curl);
 
                         curl_close($curl);
-                        echo $response;
+                        // echo $response;
                         Storage::put($file, $image_base64);
                     } else {
-                        echo "error|Maaf Gagal absen, Hubungi Tim It|in";
+                        echo "error|Maaf Gagal absen, Hubungi Admin Sekolah|in";
                     }
                 }
             }
@@ -615,7 +615,9 @@ class PresensiController extends Controller
             IFNULL(jam_masuk,'NA'),'|',
             IFNULL(jam_pulang,'NA'),'|',
             IFNULL(presensi.kode_izin,'NA'),'|',
-            IFNULL(keterangan,'NA'),'|'
+            IFNULL(keterangan,'NA'),'|',
+            IFNULL(total_jam,'NA'),'|',
+            IFNULL(lintashari,'NA'),'|'
             ),NULL)) as tgl_" . $i . ",";
 
             $field_date .= "tgl_" . $i . ",";
@@ -677,7 +679,13 @@ class PresensiController extends Controller
             // Mendefinisikan nama file ekspor "hasil-export.xls"
             header("Content-Disposition: attachment; filename=Rekap Presensi Karyawan $time.xls");
         }
-        return view('presensi.cetakrekap', compact('bulan', 'tahun', 'namabulan', 'rekap', 'rangetanggal', 'jmlhari'));
+
+        $data = ['bulan', 'tahun', 'namabulan', 'rekap', 'rangetanggal', 'jmlhari'];
+        if ($request->jenis_laporan == 1){
+        return view('presensi.cetakrekap', compact($data));
+        }else if($request->jenis_laporan == 2){
+        return view('presensi.cetakrekap_detail', compact($data));
+        }
     }
 
     public function izinsakit(Request $request)

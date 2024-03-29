@@ -62,6 +62,7 @@
                                                 <th>Jam Masuk</th>
                                                 <th>Akhir Jam Masuk</th>
                                                 <th>Jam Pulang</th>
+                                                <th>Total Jam</th>
                                                 <th>Lintas Hari</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -76,6 +77,7 @@
                                                     <td>{{ $d->jam_masuk }}</td>
                                                     <td>{{ $d->akhir_jam_masuk }}</td>
                                                     <td>{{ $d->jam_pulang }}</td>
+                                                    <td class="text-center">{{ $d->total_jam}}</td>
                                                     <td>
                                                         @if ($d->lintashari == 1)
                                                             <span class="badge bg-success">
@@ -308,6 +310,27 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
+                                <div class="input-icon mb-3">
+                                    <span class="input-icon-addon">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/user -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-alarm"
+                                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+                                            stroke="currentColor" fill="none" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M12 13m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+                                            <path d="M12 10l0 3l2 0"></path>
+                                            <path d="M7 4l-2.75 2"></path>
+                                            <path d="M17 4l2.75 2"></path>
+                                        </svg>
+                                    </span>
+                                    <input type="text" value="" id="total_jam" class="form-control"
+                                        placeholder="Total Jam" name="total_jam">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <select name="lintashari" id="lintashari" class="form-select">
                                         <option value="">Lintas Hari</option>
@@ -397,6 +420,7 @@
                 var jam_masuk = $("#jam_masuk").val();
                 var akhir_jam_masuk = $("#akhir_jam_masuk").val();
                 var jam_pulang = $("#jam_pulang").val();
+                var total_jam = $("#total_jam").val();
                 var lintashari = $("#lintashari").val();
                 if (kode_jam_kerja == "") {
                     // alert('Nik Harus Diisi');
@@ -467,6 +491,18 @@
                         confirmButtonText: 'Ok'
                     }).then((result) => {
                         $("#jam_pulang").focus();
+                    });
+
+                    return false;
+                } else if (total_jam == "") {
+                    // alert('Nik Harus Diisi');
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Total jam Harus Diisi !',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        $("#total_jam").focus();
                     });
 
                     return false;

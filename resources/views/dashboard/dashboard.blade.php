@@ -266,15 +266,19 @@
                                             <h3 style="line-height: 3px">{{ $d->nama_jam_kerja }}</h3>
                                             <h4 style="margin:0px !important">
                                                 {{ date('d-m-Y', strtotime($d->tgl_presensi)) }}</h4>
-                                            <span>
+                                                <span style="color: green">Jadwal : {{ date('H:i', strtotime($d->jam_masuk)) }} - {{ date('H:i', strtotime($d->jam_pulang)) }}</span>
+                                                <br>
+                                                <span>Absen :
                                                 {!! $d->jam_in != null ? date('H:i', strtotime($d->jam_in)) : '<span class="text-danger">Belum Scan</span>' !!}
                                             </span>
+                                            
                                             <span>
                                                 {!! $d->jam_out != null
                                                     ? '-' . date('H:i', strtotime($d->jam_out))
                                                     : '<span class="text-danger">- Belum Scan</span>' !!}
                                             </span>
                                             <br>
+                                            Status :
                                             @php
                                                 //Jam Ketika dia Absen
                                                 $jam_in = date('H:i', strtotime($d->jam_in));

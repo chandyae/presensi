@@ -32,7 +32,7 @@ function hitungjamterlambatdesimal($jam_masuk, $jam_presensi)
     $mterlambat = $menitterlambat <= 9 ? "0" . $menitterlambat : $menitterlambat;
 
 
-    $desimalterlambat = ROUND(($menitterlambat / 60), 2);
+    $desimalterlambat = $jamterlambat + ROUND(($menitterlambat / 60), 2);
     return  $desimalterlambat;
 }
 
@@ -62,11 +62,18 @@ function buatkode($nomor_terakhir, $kunci, $jumlah_karakter = 0)
 }
 
 
-function hitungjamkerja($jam_masuk, $jam_pulang)
+function hitungjamkerja($tgl_presensi, $jam_mulai, $jam_pulang, $max_total_jam,$lintashari)
 {
-    $j_masuk = strtotime($jam_masuk);
+    if($lintashari=='1'){
+        $tanggal_pulang = date ('Y-m-d', strtotime("+1 days", strtotime($tgl_presensi))); 
+    }else{
+        $tanggal_pulang = $tgl_presensi;
+    }
+    $jam_mulai = $tgl_presensi . " " . $jam_mulai;
+    $jam_pulang = $tanggal_pulang . " " . $jam_pulang;
+    $j_mulai = strtotime($jam_mulai);
     $j_pulang = strtotime($jam_pulang);
-    $diff = $j_pulang - $j_masuk;
+    $diff = $j_pulang - $j_mulai;
     if (empty($j_pulang)) {
         $jam = 0;
         $menit = 0;
@@ -75,10 +82,12 @@ function hitungjamkerja($jam_masuk, $jam_pulang)
         $m = $diff - $jam * (60 * 60);
         $menit = floor($m / 60);
     }
-
-    return $jam . ":" . $menit;
-
     
+    $menitdesimal = ROUND($menit / 60, 2);
+    $jamdesimal = $jam + $menitdesimal;
+    $totaljam = $jamdesimal > $max_total_jam ? $max_total_jam : $jamdesimal;
+    // return $jam . ":" . $menit." (". $totaljam .")";
+    return $totaljam;
 }
 
 function gethari($hari)
