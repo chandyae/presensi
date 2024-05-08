@@ -75,7 +75,7 @@
                                     <div class="col-4">
                                         <div class="form-group">
                                             <select name="kode_dept" id="kode_dept" class="form-select">
-                                                <option value="">Semua Lokasi</option>
+                                                <option value="">Semua Jabatan</option>
                                                 @foreach ($departemen as $d)
                                                     <option value="{{ $d->kode_dept }}">
                                                         {{ strtoupper($d->nama_dept) }}</option>
@@ -119,7 +119,7 @@
                                                     <th>NIP</th>
                                                     <th>Nama Guru</th>
                                                     <th>Sekolah</th>
-                                                    <th>Lokasi</th>
+                                                    <th>Jabatan</th>
                                                     <th>Jadwal</th>
                                                     <th>Jam Masuk</th>
                                                     <th>Foto</th>

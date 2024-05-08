@@ -4,7 +4,7 @@
     <input type="hidden" name="tanggal" value="{{ $tanggal }}">
     <table class="table">
         <tr>
-            <td>Nik</td>
+            <td>NIP</td>
             <td>{{ $karyawan->nik }}</td>
         </tr>
         <tr>
